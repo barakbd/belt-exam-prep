@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Books Home</title>
+    <meta charset='UTF-8' />
+    <meta name='description' content='Full app using Pylot MVC' />
+    <meta name='keywords' content='Pylot, forms, database, mySQL, routing' />
+
+    <link rel='stylesheet' type='text/css' href="/static/css/books.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <script type='text/javascript' src="/static/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <nav class='navbar'>
+        <div class='container'>
+            <div class='navbar-header'>
+                Welcome {{ session['first_name'] }}
+            </div>
+            <ul class='nav navbar-nav navbar-right'>
+                <li>
+                    <a href='/books/add'>Add Book and Review</a>
+                </li>
+                <li>
+                    <a href='/clear_session'>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class='container'>
+        <div class='row'>
+            <div class='col-lg-7'>
+                {% for review in latest_reviews%}
+                <div class='well'>
+                    <p>
+                        Book Title: {{review['book_title'] }}
+                    </p>
+                    <p>
+                        Rating: {{ review['review_rating'] }}
+                    </p>
+                    <p>
+                        Reviewer Name: {{ review['first_name'] }}
+                    </p>
+                    <p>
+                        Review says: {{ review ['review_text']}}
+                    </p>
+                </div>
+                {% endfor %}
+
+
+            </div>
+            <!-- END col-lg-7 -->
+
+            <div class='col-lg-4 col-lg-offset-1'>
+                <div class='well scrollable-menu'>
+                    <ul>
+                        {% for book in all_books %}
+                        <li>
+                            <a href='/books/{{ book['book_id'] }}'> {{ book['book_title'] }} </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End container -->
+
+</body>
+
+</html>
