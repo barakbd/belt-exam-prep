@@ -1,14 +1,21 @@
 * {
-  font-family: monaco;
+    font-family: monaco;
 }
-
-body{
+body {
     padding: 20px;
 }
-
-.warning{
-  color: red;
+.warning {
+    color: red;
 }
-.success{
-  color: green;
+.success {
+    color: green;
+}
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+.container {
+    border: 2px solid black;
+    display: inline-block;
 }

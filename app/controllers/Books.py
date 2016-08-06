@@ -30,8 +30,9 @@ class Books(Controller):
 
     def view_book(self, book_id):
         print 'Books - view_book ','\n'
-        return self.load_view('view_book.html')
-        pass
+        book_details = self.models['Book_Model'].view_book(book_id)
+        print 'Books view_book', book_details, '\n'
+        return self.load_view('view_book.html', book_details=book_details)
 
     def add_book_submit(self):
         print 'Books - add_book_submit ','\n'
@@ -47,3 +48,7 @@ class Books(Controller):
             print  book_add_success_message, '\n'
             flash(book_add_success_message, 'success')
             return redirect ('/books')
+
+    def add_review(self, book_id):
+     new_review = self.models['Book_Model'].add_review(book_id, request.form, session)
+     return redirect ('/books/'+str(book_id))

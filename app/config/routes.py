@@ -19,6 +19,8 @@ routes['POST']['/books/add_submit'] = 'Books#add_book_submit'
 
 routes['GET']['/books/<int:book_id>'] = 'Books#view_book'
 
+routes['POST']['/books/add_review/<book_id>'] = 'Books#add_review'
+
 routes['GET']['/users/<user_id>'] = 'Users#view_user'
 
 

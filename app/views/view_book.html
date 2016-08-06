@@ -7,8 +7,8 @@
     <meta name='description' content='Full app using Pylot MVC' />
     <meta name='keywords' content='Pylot, forms, database, mySQL, routing' />
 
-    <link rel='stylesheet' type='text/css' href="/static/css/styles.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel='stylesheet' type='text/css' href="/static/css/books.css" />
 
     <script type='text/javascript' src="/static/js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -16,22 +16,70 @@
 </head>
 
 <body>
-<nav>
-    <ul>
-        <li>
-            <a href='/clear_session'>
+    <nav>
+        <ul>
+            <li>
+                <a href='/clear_session'>
                 Logout
             </a>
-        </li>
-        <li>
-            Single Book Page
-        </li>
-    </ul>
-</nav>
-    <div class='container'>
+            </li>
+            <li>
+                <a href='/'>Home</a>
+            </li>
 
+            <li>
+                Single Book Page
+            </li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>{{ book_details[0]['book_title'] }}</h1>
+        <p>
+            Author: {{ book_details[0]['author_name'] }}
+        </p>
+        <p>
+          Average Rating: {{ book_details[0]['rating_avg'] }}
+        </p>
+    </header>
+    <!-- BOOK REVIEWS -->
+    <div class='container'>
+        <h2> Reviews </h2>
+        {% for detail in book_details %}
+        <div class='well'>
+            <p>
+                Ratings: {{ detail['review_rating'] }}
+            </p>
+            <p>
+                <a href='#'>{{ detail['first_name'] }}</a>: {{ detail['review_text'] }}
+            </p>
+            <p>
+                Posted on: {{ detail['created_at']}}
+            </p>
+        </div>
+        {% endfor %}
     </div>
-        <!-- End container -->
+    <!-- END BOOK REVIEWS -->
+
+    <!-- ADD REV-RATING  -->
+    <div class='container'>
+        <form action='/books/add_review/{{ book_details[0]['book_id'] }}' method='POST'>
+            <label for='review_text'>Add a review:</label>
+            <textarea name='review_text'></textarea>
+
+            <label for='review_rating'>Rating:</label>
+            <select name='review_rating'>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+            </select>
+            <input type='submit' value='Submit' />
+        </form>
+    </div>
+    <!-- END ADD REV-RATING  -->
+
 
 </body>
 
